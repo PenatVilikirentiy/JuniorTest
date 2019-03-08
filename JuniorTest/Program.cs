@@ -69,6 +69,7 @@ namespace JuniorTest
                             Console.WriteLine("\nВы ввели некорректное значение, программа будет завершена!\n");
                             Console.ReadKey();
                             Environment.Exit(0); break;
+
                         }
                 }
 
