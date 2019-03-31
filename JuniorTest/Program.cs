@@ -23,7 +23,7 @@ namespace JuniorTest
 
             var hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
             SetConsoleDisplayMode(hConsole, 1, IntPtr.Zero);
-            Console.SetBufferSize(Console.WindowWidth, Console.WindowHeight + 400);
+            Console.SetBufferSize(Console.WindowWidth, Console.WindowHeight + 600);
 
             Console.WriteLine("Добро пожаловать!\nДанный тест поможет Вам подготовиться к собеседованию на должность Junior/Middle Developer\nа так же проверить свои знания по языку C# и платформе .Net");
             Console.WriteLine("\nВ ответах следует вводить только цифру варианта ответа без пробелов и знаков!\nВ случае ввода некорректного значения/пустого ввода ответ будет засчитан как неправильный либо как ответ\"Я не знаю.\"");
@@ -36,7 +36,7 @@ namespace JuniorTest
             if (str.ToLower() == "y")
             {
 
-                LoadFile test = new LoadFile("JuniorTest.jn", "JuniorTestVariants.jn", 3);
+                LoadFile test;
 
 
                 Console.Clear();
@@ -48,20 +48,23 @@ namespace JuniorTest
                 {
                     case "1":
                         {
-                            test = new LoadFile("CodeBlogTest.jn", "CodeBlogTestVariants.jn", 3);
-                            str = "CodeBlogTest.jn"; break;
+                            test = new LoadFile("CodeBlogTest.jn", 3);
+                            test.Start();
+                            test.Score("CodeBlogTest.jn"); break;
                         }
 
                     case "2":
                         {
-                            test = new LoadFile("JuniorTest.jn", "JuniorTestVariants.jn", 3);
-                            str = "JuniorTest.jn"; break;
+                            test = new LoadFile("JuniorTest.jn", 39);
+                            test.Start();
+                            test.Score("JuniorTest.jn"); break;
                         }
 
                     case "3":
                         {
-                            test = new LoadFile("Questions.jn", 0);
-                            str = "Questions.jn"; break;
+                            test = new LoadFile("Questions.jn", 38);
+                            test.StartQuestions();
+                            test.ScoreQuestions("Questions.jn"); break;
                         }
 
                     default:
@@ -72,9 +75,9 @@ namespace JuniorTest
 
                         }
                 }
+                // Нужно как то объединить Score() и ScoreQuestions()
+                // и вынести сюда Start() и Score()
 
-                test.Start();
-                test.Score(str);
                 Console.ReadKey();
             }
             else if (str.ToLower() == "n")
