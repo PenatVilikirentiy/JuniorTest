@@ -1,0 +1,587 @@
+Вопрос №1: Что будет выведено на консоль при выполнении следующего кода?
+
+class Program
+{
+     string str = "a";
+
+     static void Main(string[] args)
+     {
+         string str = "b";
+         Console.WriteLine(str);
+     }
+}~endque
+1) Произойдет ошибка компиляции.
+2) a.
+3) b.~endansw
+Вопрос №2: Что будет выведено в результате выполнения программы?
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        try
+        {
+            var array = new int[] { 1, 2 };
+            Console.Write(array[5]);
+        }
+        catch(ApplicationException e)
+        {
+            Console.Write(1);
+        }
+        catch(SystemException e)
+        {
+            Console.Write(2);
+        }
+        catch(Exception e)
+        {
+            Console.Write(3);
+        }
+        Console.ReadLine();
+    }
+}~endque
+1) 1.
+2) 2.
+3) 3.
+4) 123.~endansw
+Вопрос №3: Что будет выведено в результате выполнения программы?
+
+class Program
+{
+    private class Test
+    {
+        public void Print()
+        {
+            try
+            {
+                throw new Exception();
+            }
+            catch (Exception)
+            {
+                Console.Write("9");
+                throw new Exception();
+            }
+            finally
+            {
+                Console.Write("2");
+            }
+        }
+    }
+    static void Main(string[] args)
+    {
+        var test = new Test();
+        try
+        {
+            test.Print();
+        }
+        catch (Exception)
+        {
+            Console.Write("5");
+        }
+        finally
+        {
+            Console.Write("4");
+        }
+        Console.ReadLine();
+    }
+}~endque
+1) 92.
+2) 954.
+3) 9254.
+4) Возникнет ошибка на этапе компиляции.~endansw
+Вопрос №4: Какой уровень доступа имеют поля класса, если модификатор доступа не указан?~endque
+1) protected.
+2) internal.
+3) protected internal.
+4) private.
+5) public.~endansw
+Вопрос №5: Как реализованы в .Net простые типы: (вроде int, double, etc...)?~endque
+1) В виде структур.
+2) В виде классов.
+3) В виде самостоятельных базовых типов.
+4) В виде типов, задаваемых операционной системой в зависимости от ее разрядности.~endansw
+Вопрос №6: Каким образом можно присвоить значения полям, которые помечены ключевым словом readonly?~endque
+1) С помощью атрибута DefaultValueAttribute.
+2) В любое время из любого метода, который содержится в том же классе, что и поле.
+3) Можно присвоить значение из любого меса в коде, но только один раз.
+4) Из конструктора, либо в месте объявления поля, приравнивая ему какое-то значение.~endansw
+Вопрос №7: С помощью какого ключевого слова осуществляется блокировка одновременного выполнения 
+           определенных участков кода несколькими потоками:~endque
+1) private.
+2) checked.
+3) internal.
+4) lock.
+5) safe.~endansw
+Вопрос №8: Назовите класс .NET, от которого наследуются все классы?~endque
+1) System
+2) System.Net
+3) System.Collections
+4) System.Object~endansw
+Вопрос №9: Что выведет на консоль следующий код:
+
+var s1 = string.Format("{0}{1}", "abc", "cba");
+var s2 = "abc" + "cba";
+var s3 = "abccba";
+ 
+Console.WriteLine(s1 == s2);
+Console.WriteLine((object)s1==(object)s2);
+Console.WriteLine(s2==s3);
+Console.WriteLine((object)s2==(object)s3);~endque
+
+1) true, false, true, true.
+2) true, true, true, true.
+3) true, false, true, false.
+4) true, false, false, false.~endansw
+Вопрос №10: Какие результаты выведет следующий код:
+
+internal class Program
+{
+    private static Object syncObject = new Object();
+
+    private static void Write()
+    {
+        lock (syncObject)
+        {
+            Console.WriteLine("test");
+        }
+    }
+
+    static void Main(string[] args)
+    {
+        lock (syncObject)
+        {
+            Write();
+        }
+    }
+}~endque
+1) Выбросит исключение.
+2) Напечатает слово "test".
+3) Произойдет взаимоблокировка (deadlock).
+4) Напечатает слово "test" бесконечное число раз.~endansw
+Вопрос №11: Даны следующие классы:
+
+public class A
+{
+    public virtual void Print1()
+    {
+        Console.Write("A");
+    }
+
+    public void Print2()
+    {
+        Console.Write("A");
+    }
+}
+
+public class B: A
+{
+    public override void Print1()
+    {
+        Console.Write("B");
+    }
+}
+
+public class C : B
+{
+    new public void Print2()
+    {
+        Console.Write("C");
+    }
+}
+
+К какому результату приведет выполнение следующего кода:
+
+var c = new C();
+A a = c;
+ 
+a.Print2();
+a.Print1();
+c.Print2();~endque
+1) ABC.
+2) CCC.
+3) ACC.
+4) AAC.~endansw
+Вопрос №12: Какой интерфейс должен реализовать класс, чтобы к переменной данного типа был применим оператор foreach:~endque
+1) IForEach.
+2) IArray.
+3) IIterator.
+4) IReader.
+5) IEnumerable.
+6) Никакой.~endansw
+Вопрос №13: Какой результат выполнения будет у следующего кода:
+
+class MyCustomException : DivideByZeroException
+{
+ 
+}
+
+static void Main(string[] args)
+{
+    try
+    {
+        Calc();
+    }
+    catch (MyCustomException e)
+    {
+        Console.WriteLine("Catch MyCustomException");
+        throw;
+    }
+    catch (DivideByZeroException e)
+    {
+        Console.WriteLine("Catch Exception");
+    }
+
+    Console.ReadLine();
+}
+ 
+private static void Calc()
+{
+    int result = 0;
+    var x = 5;
+    int y = 0;
+
+    try
+    {
+        result = x / y;
+    }
+    catch (MyCustomException e)
+    {
+        Console.WriteLine("Catch DivideByZeroException");
+        throw;
+    }
+    catch (Exception e)
+    {
+        Console.WriteLine("Catch Exception");
+    }
+    finally
+    {
+        throw new MyCustomException();
+    }
+}~endque
+1) Catch DivideByZeroException, Catch MyCustomException.
+2) Catch Exception, Catch MyCustomException.
+3) Catch DivideByZeroException, Catch DivideByZeroException.
+4) Catch Exception, Catch DivideByZeroException.~endansw
+Вопрос №14: Есть следующий код:
+
+List<Action> actions = new List<Action>();
+
+for(var count = 0; count < 10; count++)
+{
+    actions.Add(() => Console.WriteLine(count));
+}
+
+foreach(var action in actions)
+{
+    action();
+}
+
+Что будет выведено на консоль?~endque
+1) 0, 1, 2, 3, 4, 5, 6, 7, 8, 9.
+2) 10, 10, 10, 10, 10, 10, 10, 10, 10, 10.
+3) Код сгенерирует исключение.
+4) 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.~endansw
+Вопрос №15: Какова алгоритмическая сложность для операций чтения и записи для коллекции Dictionary?~endque
+1) Чтение - О(1), запись - О(1).
+2) Чтение - О(n), запись - О(1).
+3) Чтение - О(n), запись - О(n).
+4) Чтение - О(1), запись - О(n)~endansw
+Вопрос №16: В чем различие между ключевыми словами "ref" и "out"?~endque
+1) Параметр с ключевым словом ref может быть не инициализирован, а параметр с ключевым словом out обязательно должен быть инииализирован до вызова метода, который использует эти параметры.
+2) Параметр с ключевым словом out может быть не инициализирован, а параметр с ключевым словом ref обязательно должен быть инииализирован до вызова метода, который использует эти параметры.
+3) Нет различий.
+4) Ключевое слово ref может использоваться только со значимыми типами (value types), а out может использоваться как со значимыми, так и с ссылочными типами.~endansw
+Вопрос №17: Есть следующая структура:
+
+public struct S : IDisposable
+{
+    private bool dispose;
+
+    public void Dispose()
+    {
+        dispose = true;
+    }
+
+    public bool GetDispose()
+    {
+        return dispose;
+    }
+}
+
+Что будет выведено в следующем случае:
+
+var s = new S();
+
+using (s)
+{
+    Console.WriteLine(s.GetDispose());
+}
+
+Console.WriteLine(s.GetDispose());~endque
+1) true, true.
+2) true, false.
+3) false, true.
+4) false, false.~endansw
+Вопрос №18: Является ли тип List потокбезопасной (thread-safe) коллекцией?~endque
+1) Только при операциях чтения.
+2) Не является ни в каком случае.
+3) Только при операциях записи.
+4) Является во всех случаях.~endansw
+Вопрос №19: В чем различие между операцией cast (приведения типов) и оператором as?~endque
+1) Оператор "as" - это просто синтаксический сахар для "cast".
+2) Cast изменяет диначеский тип, в то время как as изменяет статический тип.
+3) В случае ошибки cast выбрасывает исключение InvalidCastException, а оператор as возвращает null.
+4) В случае ошибки cast возвращает null, а оператор as выбрасывает исключение InvalidCastException.~endansw
+Вопрос №20: Какой будет результат вызова следующего кода:
+
+static void Main(string[] args)
+{
+    object sync = new object();
+
+    var thread = new Thread(()=>
+    {
+        try
+        {
+            Work();
+        }
+
+        finally
+        {
+            lock (sync)
+            {
+                Monitor.PulseAll(sync);
+            }
+        }
+    });
+
+    thread.Start();
+
+    lock (sync)
+    {
+        Monitor.Wait(sync);
+    }
+
+    Console.WriteLine("test");
+}
+
+private static void Work()
+{
+    Thread.Sleep(1000);
+}~endque
+1) Будет выброшено SynchronizationLockException.
+2) Слово "test" не будет напечатано, так как произойдет взаимоблокировка (deadlock).
+3) В одних случаях может быть напечатано слово "test", а в других может произойти взаимоблокировка.
+4) Всегда будет напечатано слово "test".~endansw
+Вопрос №21: Когда вызывается статический конструктор класса:~endque
+1) Один раз при первом создании экземпляра класса или при первом обращении к статическим членам класса.
+2) После каждого обращения к статическим полям, методам и свойствам.
+3) Строгий порядок вызова неопределен.
+4) Статических конструкторов нет.~endansw
+Вопрос №22: Можно ли изменять поля const и readonly в программном коде?~endque
+1) Оба нельзя.
+2) Оба можно.
+3) Оба можно только в конструкторе.
+4) const можно только в конструкторе.
+5) readonly можно только в конструкторе.~endansw
+Вопрос №23: Какая из перечисленных операций linq исключает дублирование одинаковых элементов в выходной последовательности:~endque
+1) Single()
+2) Any()
+3) Zip()
+4) First()
+5) Distinct()~endansw
+Вопрос №24: Что будет выведено в результате выполнения программы?
+class Program
+{
+    private enum En
+    {
+        First = 15,
+        Second,
+        Third = 54
+    }
+    static void Main(string[] args)
+    {
+        Console.WriteLine((int)En.Second);
+        Console.Read();
+    }
+}~endque
+1) 0.
+2) 1.
+3) 16.
+4) Возникнет ошибка на этапе компиляции.~endansw
+Вопрос №25: Когда использовать StringBuilder предпочтительнее, чем string?~endque
+1) Если строка редко изменяется.
+2) Если строка часто изменяется.
+3) Если строка содержит спецсимволы.
+4) Если строка содержит исключительно цифры.~endansw
+Вопрос №26: Что будет выведено в результате выполнения программы?
+class Program
+{
+    static void Main(string[] args)
+    {
+        int c = 3;
+        Console.Write(Sum(5,3,out c)+" ");
+        Console.Write(c);
+        Console.ReadLine();
+    }
+    static int Sum(int a, int b, out int c)
+    {
+        return a + b;
+    }
+}~endque
+1) 8.
+2) 8 3.
+3) 8 0.
+4) Возникнет ошибка на этапе компиляции.~endansw
+Вопрос №27: Что будет выведено в результате выполнения программы?
+class Program
+{
+    static void Main(string[] args)
+    {
+        var a = null;
+        a = 10;
+        Console.WriteLine(a);
+        Console.ReadLine();
+    }
+}~endque
+1) 0.
+2) 10.
+3) Пустая строка.
+4) Возникнет ошибка на этапе компиляции.~endansw
+Вопрос №28: ~endque
+1) 
+2) 
+3) ~endansw
+Вопрос №29: Что выведет следующий код?
+Console.Write("AppleBanana".Substring(5));
+Console.Write("AppleBanana".Substring(5, 6));~endque
+1) BananaBanana.
+2) AppleAppleBanana.
+3) AppleBanana.
+4) BananaB.
+5) Первая строка не скомпилируется, т.к. метод Substring всегда должен принимать два аргумента.
+6) Вторая строка не скомпилируется, т.к. метод Substring всегда должен принимать один аргумент.
+7) Данный код не скомпилируется, т.к. методы есть только у лбъектов, а в приведенном примере делается попытка вызвать метод от строки.~endansw
+Вопрос №30: Что выведет следующий код?
+int a = 1;
+double b = 2;
+string c = "3";
+Console.WriteLine(a + b);
+Console.WriteLine(a + c);
+Console.WriteLine(b + c);~endque
+1) 12 13 23.
+2) 3 13 23.
+3) 3 4 5.
+4) Данный код не скомпилируется, т.к. C# позволяет складывать только переменные, тип которых совпадает.~endansw
+Вопрос №31: Что выведет следующий код?
+int[] a = new int[5];
+List<int> b = a;
+Console.WriteLine(b.Count);~endque
+1) 0.
+2) Данный код успешно выполнится, но ничего не будет выведено.
+3) Произойдет ошибка компиляции, т.к. нельзя неявно привести тип int[] к типу List<int>.
+4) 5.
+5) null.~endansw
+Вопрос №32: Что выведет следующий код?
+bool a = true;
+string b = "b", c = "c";
+Console.WriteLine(a ? b : c);~endque
+1) Произойдет ошибка компиляции.
+2) bc.
+3) False.
+4) True.
+5) b.
+6) a.
+7) c.
+8) Произойдет ошибка выполнения.~endansw
+Вопрос №33: Что выведет на консоль следующий код:
+void MakeBanana(string fruit)
+{
+	fruit = "banana";
+}
+
+void Main()
+{
+	var fruit = "apple";
+	MakeBanana(fruit);
+	Console.WriteLine(fruit);
+}~endque
+1) Произойдет ошибка выполнения.
+2) Пустая строка.
+3) apple.
+4) banana.
+5) Произойдет ошибка компиляции.~endansw
+Вопрос №34: Что выведет следующий код?
+string[] fruits = new string[] { "kiwi", "apple", "banana" };
+int counter = 0;
+foreach(var fruit in fruits)
+{
+	counter++;
+	if(fruit == "kiwi")
+	   continue;
+	counter++;
+	if(fruit == "apple")
+	   break;
+}
+Console.WriteLine(counter);~endque
+1) 6.
+2) 4.
+3) 0.
+4) 1.
+5) 5.
+6) Произойдет ошибка выполнения.
+7) 3.
+8) Произойдет ошибка компиляции.
+9) 2.~endansw
+Вопрос №35: Что выведет следующий код?
+string[] fruits = new string[] { "kiwi", "apple", "banana" };
+Console.WriteLine(fruits.Average(fruit => fruit.Lenght));~endque
+1) Произойдет ошибка выполнения.
+2) 5.
+3) 4.
+4) kiwi.
+5) 6.
+6) Произойдет ошибка компиляции.
+7) apple.
+8) banana.~endansw
+Вопрос №36: Укажите правильный вариант C#-синтаксиса для метода Foo, который принимает переменное количество int-параметров:~endque
+1) void Foo(... a) { }
+2) void Foo(params int[] a) { }
+3) void Foo() { }
+4) В языке C# такой возможности нет.
+5) void Foo(parameters int[] a) { }
+6) void Foo(int... a) { }
+7) void Foo(int[] a) { }
+8) void Foo(int a1, int a2, int a3, ...) { }
+9) Дописать еще 1 вариант ответа!!!~endansw
+Вопрос №37: Что означает следующий синтаксис:
+public static class Extensions
+{
+   public static int PlusFive(this int value)
+   {
+      return value + 5;
+   }
+}~endque
+1) Ключевое слово this не оказывает никакого влияния на код при объявлении аргументов метода. Другими словами, приведенный код эквивалентен следующему: (код на строках ниже).
+2) PlusFive -- это метод расширения (extension method). Это означает что его можно будет вызвать для любой int-переменной, в результате чего мы получим оригинальное значение плюс пять. Пример:
+3) В языке C# такой синтаксис недопустим, при объявлении аргументов нельзя использовать ключевое слово this.~endansw
+Вопрос №38: Что выведет следующий код?
+var random1 = new Random(10);
+var random2 = new Random(10);
+Console.WriteLine(random1.Next() - random2.Next());~endque
+1) Произойдет ошибка выполнения.
+2) 1.
+3) Произойдет ошибка компиляции.
+4) Каждый запуск программы будет давать новый результат, т.к. метод Next() класса Random каждый раз возвращает случайное число.
+5) 0.
+6) Ответ зависит исключительно от операционной системы.
+7) 2147483647.~endansw
+Вопрос №39: Что выведет следующий код?
+List<int> x = new List<int> { 2, 1, 3 };
+x.Sort();
+Console.WriteLine(x[0]);~endque
+1) 2, т.к. метод Sort() возвращает новый отсортированный список, не затрагивая при этом оригинал.
+2) 3, т.к. метод Sort() по умолчанию сортирует список в обратном порядке.
+3) Спецификации языка не задают однозначного поведения программы.
+4) 1, т.к. метод Sort() отсортирует список и поставит 1 на нулевое место.
+5) Будет выброшен IndexOutOfRangeException, т.к. нумерация списков начинается с единицы.
+6) Произойдет ошибка компиляции, т.к. у списков нет метода Sort().
+7) Произойдет ошибка компиляции, т.к. метод Sort() в обязательном порядке должен принимать делегат, который сравнивает элементы при сортировке.~endansw
