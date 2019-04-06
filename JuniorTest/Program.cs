@@ -35,8 +35,10 @@ namespace JuniorTest
             string str = Console.ReadLine();
             if (str.ToLower() == "y")
             {
-
+                Load tests = new Load("CodeBlogTest.jn");
                 LoadFile test;
+                string fileName = "";
+                int number = 0;
 
 
                 Console.Clear();
@@ -48,23 +50,29 @@ namespace JuniorTest
                 {
                     case "1":
                         {
-                            test = new LoadFile("CodeBlogTest.jn", 3);
-                            test.Start();
-                            test.Score("CodeBlogTest.jn"); break;
+                            fileName = "CodeBlogTest.jn";
+                            number = 3; break;
+                            //test = new LoadFile("CodeBlogTest.jn", 3);
+                            //test.Start();
+                            //test.Score("CodeBlogTest.jn"); break;
                         }
 
                     case "2":
                         {
-                            test = new LoadFile("JuniorTest.jn", 39);
-                            test.Start();
-                            test.Score("JuniorTest.jn"); break;
+                            fileName = "JuniorTest.jn";
+                            number = 39; break;
+                            //test = new LoadFile("JuniorTest.jn", 39);
+                            //test.Start();
+                            //test.Score("JuniorTest.jn"); break;
                         }
 
                     case "3":
                         {
-                            test = new LoadFile("Questions.jn", 38);
-                            test.StartQuestions();
-                            test.ScoreQuestions("Questions.jn"); break;
+                            fileName = "Questions.jn";
+                            number = 38; break;
+                            //test = new LoadFile("Questions.jn", 38);
+                            //test.StartQuestions();
+                            //test.ScoreQuestions("Questions.jn"); break;
                         }
 
                     default:
@@ -75,8 +83,12 @@ namespace JuniorTest
 
                         }
                 }
-                // Нужно как то объединить Score() и ScoreQuestions()
-                // и вынести сюда Start() и Score()
+
+                tests.Start();
+
+                //test = new LoadFile(fileName, number);
+                //test.StartQuestions();
+                //test.ScoreQuestions(fileName);
 
                 Console.ReadKey();
             }
