@@ -4,48 +4,30 @@ namespace JuniorTest
 {
     class Question
     {
-        string question;
-        List<string> variants;
+        public  string Question{get;private set;}
+        public List<string> variants{get; private set;}
 
-        public Question()
+        public Question(string question,param string[] variants)
         {
-            question = "";
-            variants = new List<string>();
+            Question = question;
+           this.variants =new List<string>(variants);
         }
 
-        public void AddQuestion(string question)
-        {
-            this.question = question;
-        }
+       
 
         public void AddVariant(string variant)
         {
             variants.Add(variant);
         }
 
-        public string GetVariant(string answer)
+        public string GetVariant(int index)
         {
-            if (int.TryParse(answer, out int index) && (index > 0 && index <= variants.Count))
-                return variants[index - 1].Substring(3  );
-            else
-                return "Некорректный ввод данных";
+            return variants[index];
+
         }
 
-        public string GetQuestion()
-        {
-            return question;
-        }
+       
 
-        public string GetVariants()
-        {
-            string var = "";
-
-            foreach(var variant in variants)
-            {
-                var += variant + "\n";
-            }
-
-            return var;
-        }
+        
     }
 }
