@@ -35,7 +35,7 @@ namespace JuniorTest
             string str = Console.ReadLine();
             if (str.ToLower() == "y")
             {
-                Load tests = new Load("CodeBlogTest.jn");
+                Loader tests = new Loader("CodeBlogTest.jn");
                 LoadFile test;
                 string fileName = "";
                 int number = 0;
@@ -84,7 +84,6 @@ namespace JuniorTest
                         }
                 }
 
-                tests.Start();
 
                 //test = new LoadFile(fileName, number);
                 //test.StartQuestions();

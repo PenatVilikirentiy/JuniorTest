@@ -4,12 +4,12 @@ namespace JuniorTest
 {
     class Question
     {
-        public  string Question{get;private set;}
+        public  string question{get;private set;}
         public List<string> variants{get; private set;}
 
-        public Question(string question,param string[] variants)
+        public Question(string question,params string[] variants)
         {
-            Question = question;
+            this.question = question;
            this.variants =new List<string>(variants);
         }
 
